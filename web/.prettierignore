@@ -1,0 +1,8 @@
+node_modules
+.next
+yarn.lock
+package-lock.json
+package.json
+next.config.js
+public
+dist
