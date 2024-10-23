@@ -1,0 +1,88 @@
+.Base {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 12px;
+  text-align: center;
+  font-weight: $font-weight-bolder;
+  flex: 1;
+  border-radius: 16px;
+  cursor: pointer;
+  outline: 1px solid $gray-light-300;
+  @include transition(outline);
+
+  @include media($from: 'sm') {
+    padding: 24px;
+  }
+
+  &.MorePaddingBottom {
+    padding-bottom: 16px;
+
+    @include media($from: 'sm') {
+      padding-bottom: 32px;
+    }
+  }
+
+  .Text {
+    margin: 16px 0;
+    color: $gray-400;
+  }
+
+  .Title {
+    color: $gray-400;
+    margin: 0;
+    margin-bottom: 4px;
+  }
+
+  .Subtitle {
+    color: $gray-450;
+    margin: 0;
+
+    @include media($until: 'md') {
+      display: none;
+    }
+  }
+
+  .AcceptedText {
+    font-size: $font-extra-small;
+    color: $gray-450;
+    margin: 0;
+    margin-top: 24px;
+  }
+
+  &:hover {
+    outline-color: $primary-500;
+  }
+
+  &.Focused {
+    outline-color: $primary-500;
+  }
+
+  &.Accept {
+    outline-color: $primary-500;
+    background-color: $gray-800;
+  }
+
+  &.Reject {
+    outline-color: $red-600;
+    background-color: $red-50;
+    cursor: no-drop;
+  }
+
+  &.Disabled {
+    cursor: default;
+    // opacity: 0.5;
+    &:hover {
+      outline-color: #eee;
+    }
+  }
+}
+
+.Dropzone {
+  width: 100%;
+  height: 107px;
+  border: 1px dashed $primary-500;
+  border-radius: $border-radius-mediumPlus;
+  background-color: #ffc1070f;
+}

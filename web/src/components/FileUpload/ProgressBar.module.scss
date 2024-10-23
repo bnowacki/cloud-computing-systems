@@ -1,0 +1,26 @@
+.Bar {
+  height: 3px;
+  width: 100%;
+  background: $gray-light-150;
+  position: relative;
+  border-radius: $border-radius-full;
+  overflow: hidden;
+}
+
+.Progress {
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: 40%;
+  background: $primary-500;
+  animation: progressAnimation 2s linear infinite;
+}
+
+@keyframes progressAnimation {
+  0% {
+    left: -40%;
+  }
+  100% {
+    left: 100%;
+  }
+}

@@ -1,0 +1,96 @@
+.GridItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  outline: 1px solid $gray-400;
+
+  border-radius: $border-radius-medium;
+  overflow: hidden;
+  position: relative;
+
+  flex-shrink: 0;
+
+  .Image {
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .Overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    word-break: break-word;
+    background: #00000066;
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: default;
+
+    @include transition(opacity);
+
+    &:hover {
+      opacity: 1;
+    }
+
+    .Buttons {
+      display: flex;
+      gap: 16px;
+      flex-direction: row;
+      align-items: center;
+
+      svg {
+        path {
+          stroke: #fff;
+          @include transition(stroke);
+        }
+
+        &:hover {
+          path {
+            stroke: $gray-light-500;
+          }
+        }
+      }
+    }
+
+    .FilePreview {
+      height: 60px;
+      width: 60px;
+      object-fit: contain;
+    }
+  }
+
+  .UploadProgress {
+    position: absolute;
+    inset: 0;
+    background: #00000066;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      color: #fff;
+    }
+
+    > div {
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+    }
+  }
+}

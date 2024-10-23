@@ -1,0 +1,162 @@
+// FONTS
+$font-base: 10px;
+$font-extra-small: 12px;
+$font-small: 13px;
+$font-body-small: 14px;
+$font-body: 16px;
+$font-lg: 18px;
+$font-xl: 2px;
+
+// FONT WEIGHT
+$font-weight-lighter: 200;
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-bolder: 500;
+$font-weight-semi-bold: 600;
+$font-weight-bold: 700;
+$font-weight-boldest: 900;
+
+// TRANSITIONS
+$transition-base: 0.2s;
+
+// COLORS
+$white: #ffffff;
+$black: #000000;
+
+$gray-950: #040404;
+$gray-900: #1b1b1b;
+$gray-870: #202020;
+$gray-850: #292929;
+$gray-800: #383838;
+$gray-750: #585858;
+$gray-720: #6a6a6a;
+$gray-700: #6b6b6b;
+$gray-600: #767676;
+$gray-550: #726f6f;
+$gray-500: #8c8c8c;
+$gray-450: #8d8d8d;
+$gray-400: #959595;
+
+$gray-light-950: #868686;
+$gray-light-900: #707070;
+$gray-light-800: #737373;
+$gray-light-750: #adadad;
+$gray-light-700: #a5a5a5;
+$gray-light-650: #cdcdcd;
+$gray-light-600: #a8a8a8;
+$gray-light-550: #cfcfcf;
+$gray-light-500: #c2c2c2;
+$gray-light-450: #e2e2e2;
+$gray-light-400: #dadada;
+$gray-light-370: #d3d3d3;
+$gray-light-350: #ececec;
+$gray-light-300: #e8e8e8;
+$gray-light-250: #f5f5f5;
+$gray-light-200: #ebebeb;
+$gray-light-150: #eaeaea;
+$gray-light-100: #f8f8f8;
+$gray-light-70: #f9f9f9;
+$gray-light-50: #f2f2f2;
+$gray-light: #fff9e8;
+
+$red-600: #d10d19;
+$red-500: #fc5b5b;
+$red-200: #fc8f8f;
+$red-100: #fdb5b5;
+$red-50: #fde5ee;
+
+$pink-100: #ffe9db;
+
+$blue-500: #067281;
+$blue-50: #d3eaed;
+
+$primary-950: #503c00;
+$primary-920: #664e00;
+$primary-900: #715400;
+$primary-850: #977600;
+$primary-800: #806000;
+$primary-700: #765800;
+$primary-600: #806000;
+$primary-550: #ff7e07;
+$primary-500: #ffc107;
+$primary-300: #ffd042;
+$primary-250: #fae9b8;
+$primary-200: #fdda64;
+$primary-150: #f9e07c;
+$primary-100: #fbe587;
+$primary-75: #fff9e8;
+$primary-50: #ffe9db;
+$primary-25: #ffe5d5;
+$primary-10: #ffebd9;
+
+$primary-light-300: #fffdf5;
+$primary-light-500: #fff4d2;
+
+$green-600: #00a542;
+$green-50: #dfe7e2;
+
+// HEADINGS
+$heading-h1: 64px;
+$heading-h2: 36px;
+$heading-h3: 24px;
+$heading-h4: 18px;
+$heading-h5: 14px;
+
+// Z-INDEX
+$z-index-overTop: 1001;
+$z-index-top: 1000;
+$z-index-middle: 500;
+$z-index-bottom: 1;
+$z-index-negative: -1;
+
+// BORDER RADIUS
+$border-radius-full: 1000px;
+$border-radius-4xl: 100px;
+$border-radius-3xl: 6px;
+$border-radius-2xl: 32px;
+$border-radius-xl: 28px;
+$border-radius-large: 24px;
+$border-radius-semiLarge: 19px;
+$border-radius-mediumPlusUltra: 17px;
+$border-radius-mediumPlus: 16px;
+$border-radius-big: 12px;
+$border-radius-medium: 8px;
+$border-radius-small: 4px;
+
+// GRID
+$gridColumnCount: 12;
+$gridGap: 20;
+
+// CONTAINER
+$containerSmMaxWidth: 1016px;
+$containerMaxWidth: 1440px;
+
+// BREAKPOINTS
+$breakpoints: (
+  xs: 330px,
+  s: 380px,
+  sm: 568px,
+  md: 768px,
+  lg: 1024px,
+  xlg: 1200px,
+  xl: 1400px,
+  xxl: 1920px,
+);
+
+// EXPORTS
+:export {
+  fontWeightBolder: $font-weight-bolder;
+
+  blackColor: $black;
+  whiteColor: $white;
+  gray900Color: $gray-900;
+  gray500Color: $gray-500;
+  gray400Color: $gray-400;
+  grayLight100Color: $gray-light-100;
+  grayLight200Color: $gray-light-200;
+  grayLight300Color: $gray-light-300;
+  grayLight950Color: $gray-light-950;
+  red500Color: $red-500;
+  orange500Color: $primary-500;
+  orange200Color: $primary-200;
+}
