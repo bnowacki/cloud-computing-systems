@@ -36,6 +36,7 @@ export default function SignUpMagicLink() {
       const { error } = await supabase.auth.signInWithOtp({
         email: data.email,
         options: {
+          shouldCreateUser: true,
           data: { full_name: data.fullName },
         },
       })

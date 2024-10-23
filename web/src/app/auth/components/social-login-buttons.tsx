@@ -4,8 +4,8 @@ import React from 'react'
 
 import { Provider } from '@supabase/supabase-js'
 import { FcGoogle } from 'react-icons/fc'
-import { SiLinkedin } from 'react-icons/si'
 
+// import { SiLinkedin } from 'react-icons/si'
 import toast from '@/components/toast'
 import { Button } from '@/components/ui/button'
 import { createClient } from '@/utils/supabase/client'
@@ -48,7 +48,7 @@ export default function SocialLoginButtons({ disabled }: { disabled?: boolean })
           <FcGoogle className="h-4 w-4" /> <span>Google</span>
         </div>
       </Button>
-      <Button
+      {/* <Button
         onClick={() => handleProvider('linkedin_oidc')}
         disabled={disabled || !!providerLoading}
         className="w-full border-1 border-foreground text-foreground bg-[#0077B5] hover:bg-[#046293] active:bg-[#0B4971]"
@@ -56,7 +56,7 @@ export default function SocialLoginButtons({ disabled }: { disabled?: boolean })
         <div className="flex items-center gap-2">
           <SiLinkedin className="h-4 w-4 " /> <span>LinkedIn</span>
         </div>
-      </Button>
+      </Button> */}
     </>
   )
 }

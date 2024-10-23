@@ -27,6 +27,7 @@ export default function FileUpload({
     onDelete,
     maxFiles,
     maxSize,
+    prependUploads: true,
   })
 
   return (

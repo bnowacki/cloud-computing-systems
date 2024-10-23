@@ -2,6 +2,7 @@ import React from 'react'
 
 import { redirect } from 'next/navigation'
 
+import Logo from '@/components/logo'
 import { createClient } from '@/utils/supabase/server'
 
 export default async function AuthLayout({ children }: { children: React.ReactNode }) {
@@ -12,5 +13,10 @@ export default async function AuthLayout({ children }: { children: React.ReactNo
 
   if (user) return redirect('/')
 
-  return <div className="flex items-center justify-center h-full min-h-screen">{children}</div>
+  return (
+    <div className="flex items-center justify-center flex-col gap-4 h-full min-h-screen">
+      <Logo />
+      <div className="flex items-center justify-center self-stretch">{children}</div>
+    </div>
+  )
 }
