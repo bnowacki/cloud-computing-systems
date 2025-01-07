@@ -47,9 +47,9 @@ export default function FileUpload({
 
   const [showDialog, setShowDialog] = useState(false)
   const [status, setStatus] = useState({ id: '', status: '', message: '' })
-  const [prevFiles, setPrevFiles] = useState(files)
 
-  useEffect(() => console.log(status), [status])
+  useEffect(() => console.log('status', status), [status])
+  useEffect(() => console.log('files', files), [files])
 
   // Fetch the newest file from the processing_files table
   const fetchLatestFile = async () => {
@@ -126,7 +126,7 @@ export default function FileUpload({
 
   useEffect(() => {
     // Monitor files if necessary when a zip file is dropped
-    const zipFile = files.find(file => file.name.endsWith('.zip'))
+    const zipFile = files[0].name.endsWith('.zip')
     if (zipFile) {
       monitorZipUpload() // Monitor the upload process
     }
