@@ -40,7 +40,7 @@ export function Combobox({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-full justify-between"
+          className="justify-between w-full"
           iconRight={<ChevronsUpDown className="opacity-50" />}
         >
           {value ? options?.find(framework => framework.value === value)?.label : placeholder}

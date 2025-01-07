@@ -2,6 +2,10 @@ import { UploadResult } from '@/types/upload'
 
 import { createClient } from './supabase/client'
 
+const isFileValid = (): boolean => {
+  return Math.random() < 0.5
+}
+
 export const uploadFile = async (
   file: File,
   bucket: string,
@@ -10,6 +14,10 @@ export const uploadFile = async (
   const filepath = scope ? `/${scope}/${file.name}` : `/${file.name}`
 
   const supabase = createClient()
+
+  if (!isFileValid()) {
+    throw new Error(`File "${file.name}" failed validation.`)
+  }
 
   // Check if the file is a ZIP file (by MIME type or file extension)
   if (file.type === 'application/zip' || file.name.endsWith('.zip')) {
@@ -59,26 +67,51 @@ export const uploadFile = async (
   }
 }
 
-// Simulate processing of ZIP file after it has been uploaded
 const processZipFile = async (file: File, recordId: number) => {
   const supabase = createClient()
 
   console.log('Simulating processing for file:', file.name)
 
-  // Simulate a delay (e.g., 10 seconds) to represent processing time
+  // Step 2: After 3 seconds, set status to "opening" for 3 seconds
   setTimeout(async () => {
-    console.log('Processing complete for file:', file.name)
-
-    // After 10 seconds, update the status of the file in the database to "processed"
-    const { error: updateError } = await supabase
+    console.log('Status: opening for file:', file.name)
+    const { error: openingError } = await supabase
       .from('processing_files')
-      .update({ status: 'processed', processed_at: new Date() })
+      .update({ status: 'opening' })
       .eq('id', recordId)
 
-    if (updateError) {
-      console.error('Error updating file status:', updateError.message)
-    } else {
-      console.log('File processed successfully:', file.name)
+    if (openingError) {
+      console.error('Error updating file status to "opening":', openingError.message)
+      return
     }
-  }, 10000) // 10 seconds delay to simulate processing time
+
+    // Step 3: After 3 seconds, set status to "checking" for 4 seconds
+    setTimeout(async () => {
+      console.log('Status: checking for file:', file.name)
+      const { error: checkingError } = await supabase
+        .from('processing_files')
+        .update({ status: 'checking' })
+        .eq('id', recordId)
+
+      if (checkingError) {
+        console.error('Error updating file status to "checking":', checkingError.message)
+        return
+      }
+
+      // Step 4: After 4 seconds, set status to "processed"
+      setTimeout(async () => {
+        console.log('Status: processed for file:', file.name)
+        const { error: processedError } = await supabase
+          .from('processing_files')
+          .update({ status: 'processed', processed_at: new Date() })
+          .eq('id', recordId)
+
+        if (processedError) {
+          console.error('Error updating file status to "processed":', processedError.message)
+        } else {
+          console.log('File processed successfully:', file.name)
+        }
+      }, 5000) // 4 seconds for "checking"
+    }, 4000) // 3 seconds for "opening"
+  }, 4000) // 3 seconds for "processing"
 }
