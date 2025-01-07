@@ -12,6 +12,7 @@ import { createClient } from '@/utils/supabase/client'
 
 export default function Files({ data }: { data: FileObject[] }) {
   const [files, setFiles] = useState<UploadResult[]>([])
+  const [loading, setLoading] = useState(false) // Add loading state
 
   const { profile } = useAuth()
 
@@ -22,39 +23,60 @@ export default function Files({ data }: { data: FileObject[] }) {
         return
       }
 
-      const { data: urls, error } = await createClient()
-        .storage.from(BUCKET)
-        .createSignedUrls(
-          data.map(f => `${profile.id}/${f.name}`),
-          3600
+      setLoading(true) // Start loading when fetching signed URLs
+
+      try {
+        const { data: urls, error } = await createClient()
+          .storage.from(BUCKET)
+          .createSignedUrls(
+            data.map(f => `${profile.id}/${f.name}`),
+            3600
+          )
+
+        if (error) throw error
+
+        setFiles(
+          urls.map(u => ({
+            name: u.path?.split('/').at(-1) || '',
+            path: u.path || '',
+            url: u.signedUrl || '',
+          }))
         )
-
-      if (error) throw error
-
-      setFiles(
-        urls.map(u => ({
-          name: u.path?.split('/').at(-1) || '',
-          path: u.path || '',
-          url: u.signedUrl || '',
-        }))
-      )
+      } catch (error) {
+        console.error('Error fetching signed URLs:', error)
+      } finally {
+        setLoading(false) // Stop loading
+      }
     })()
   }, [data, profile])
 
   return (
-    <FileUpload
-      title="Upload files"
-      subtitle="Drag and drop files here or select them from disk."
-      acceptedText="Accepted formats include .pdf, .jpg and .png. Maximum size of a single file 25MB"
-      accept={{
-        'application/pdf': ['.pdf'],
-        'image/png': ['.png'],
-        'image/jpeg': ['.jpg', '.jpeg', '.jfif', '.pjpeg', '.pjp'],
-      }}
-      maxSize={25 * MB}
-      value={files}
-      onUpload={v => setFiles(p => [v, ...p])}
-      onDelete={v => setFiles(p => p.filter(f => f.path !== v))}
-    />
+    <div>
+      <FileUpload
+        title="Upload files"
+        subtitle="Drag and drop files here or select them from disk."
+        acceptedText="Accepted formats include .pdf, .jpg, .png, and .zip. Maximum size of a single file is 25MB."
+        accept={{
+          'application/pdf': ['.pdf'],
+          'image/png': ['.png'],
+          'image/jpeg': ['.jpg', '.jpeg', '.jfif', '.pjpeg', '.pjp'],
+          'application/zip': ['.zip'], // Allow ZIP file uploads
+        }}
+        maxSize={25 * MB}
+        value={files}
+        onUpload={async v => {
+          setLoading(true) // Start loading when uploading a file
+          try {
+            setFiles(p => [v, ...p])
+          } catch (error) {
+            console.error('Error uploading file:', error)
+          } finally {
+            setLoading(false) // Stop loading
+          }
+        }}
+        onDelete={v => setFiles(p => p.filter(f => f.path !== v))}
+      />
+      {loading && <div className="loading-indicator">Uploading...</div>} {/* Loading indicator */}
+    </div>
   )
 }

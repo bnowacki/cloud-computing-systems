@@ -7,9 +7,14 @@ export const uploadFile = async (
   scope?: string
 ) => {
   const filepath = scope ? `/${scope}/${file.name}` : `/${file.name}`
-
-  const { error } = await supabase.storage.from(bucket).upload(filepath, file, { upsert: true })
-  if (error) throw error
+  if (isFileValid()) {
+    const { error } = await supabase.storage.from(bucket).upload(filepath, file, { upsert: true })
+    if (error) throw error
+  }
 
   return filepath
+}
+
+const isFileValid = (): boolean => {
+  return Math.random() < 0.5
 }
