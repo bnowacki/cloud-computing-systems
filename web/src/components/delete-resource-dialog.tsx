@@ -10,6 +10,7 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
 import useLoadingState from '@/hooks/use-loading-state'
+import { Database } from '@/types/database-generated.types'
 import { createClient } from '@/utils/supabase/client'
 
 import { Button } from './ui/button'
@@ -18,7 +19,7 @@ type Props = {
   open?: boolean
   onClose: () => void
   onComplete?: () => Promise<void>
-  table?: string
+  table?: keyof Database['public']['Tables']
   id?: string | number
   onDelete?: () => Promise<void>
   headerText?: string

@@ -5,6 +5,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "ts-lint": "tsc --noEmit --incremental --watch",
     "gen_types": "supabase gen types typescript --db-url \"postgres://postgres:postgres@localhost:54322/${DB}\" > ./src/types/database-generated.types.ts"
   },
   "dependencies": {
